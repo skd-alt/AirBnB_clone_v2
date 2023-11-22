@@ -41,6 +41,7 @@ class HBNBCommand(cmd.Cmd):
         Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
         (Brackets denote optional fields in usage example.)
         """
+
         _cmd = _cls = _id = _args = ''  # initialize line elements
 
         # scan for general formating - i.e '.', '(', ')'
@@ -118,10 +119,34 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        cmmnds = args.split()
+        if cmmnds[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        new_instance = HBNBCommand.classes[cmmnds[0]]()
+
+        i = 1
+        splits = []
+        attr = ""
+
+        for i in range(len(cmmnds)):
+            splits = cmmnds.split('=')
+            if splits[1][0] = "\"":
+                try:
+                    setattr(new_insatnce, attr, str(splits[1]))
+                except Exception as e:
+                    pass
+            elif '.' in splits[1]:
+                attr = splits[0]
+                try:
+                    setattr(new_insatnce, attr, float(splits[1]))
+                except Exception as e:
+                    pass
+            else:
+                try:
+                    setattr(new_insatnce, attr, int(splits[1]))
+                except Exception as e:
+                    pass
         storage.save()
         print(new_instance.id)
         storage.save()
