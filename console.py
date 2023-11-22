@@ -133,9 +133,12 @@ class HBNBCommand(cmd.Cmd):
             print(splits)
             attr = (splits[0])
             value = splits[1]
-            print(value)
             if '"' in value:
                 value = str(value[1:-1])
+                if '"' in value:
+                    value.replace('"', '\"')
+                if '_' in value:
+                    value.replace('_', ' ')
             else:
                 try:
                     value = int(value)
