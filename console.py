@@ -130,15 +130,14 @@ class HBNBCommand(cmd.Cmd):
 
         for i in range(len(cmmnds) - 1):
             splits = cmmnds[i + 1].split('=')
-            print(splits)
             attr = (splits[0])
             value = splits[1]
             if '"' in value:
-                value = str(value[1:-1])
-                if '"' in value:
-                    value.replace('"', '\"')
+                value = value[1:-1]
                 if '_' in value:
-                    value.replace('_', ' ')
+                    value = value.replace('_', ' ')
+                if '"' in value:
+                    value = value.replace('"', '\\"')
             else:
                 try:
                     value = int(value)
