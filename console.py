@@ -129,22 +129,23 @@ class HBNBCommand(cmd.Cmd):
         splits = []
         attr = ""
 
-        for i in range(len(cmmnds)):
-            splits = cmmnds.split('=')
-            if splits[1][0] = "\"":
+        for i in range(len(cmmnds) - 1):
+            splits = cmmnds[1].split('=')
+            if splits[1][0] == "\"":
+                attr = splits[0]
                 try:
-                    setattr(new_insatnce, attr, str(splits[1]))
+                    setattr(new_instance, attr, splits[1])
                 except Exception as e: # comment
                     pass
             elif '.' in splits[1]:
                 attr = splits[0]
                 try:
-                    setattr(new_insatnce, attr, float(splits[1]))
+                    setattr(new_instance, attr, float(splits[1]))
                 except Exception as e:
                     pass
             else:
                 try:
-                    setattr(new_insatnce, attr, int(splits[1]))
+                    setattr(new_instance, attr, int(splits[1]))
                 except Exception as e:
                     pass
         storage.save()
