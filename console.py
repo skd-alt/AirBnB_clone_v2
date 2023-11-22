@@ -134,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
             if splits[1][0] = "\"":
                 try:
                     setattr(new_insatnce, attr, str(splits[1]))
-                except Exception as e:
+                except Exception as e: # comment
                     pass
             elif '.' in splits[1]:
                 attr = splits[0]
