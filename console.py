@@ -151,8 +151,9 @@ class HBNBCommand(cmd.Cmd):
                         continue
 
             setattr(new_instance, attr, value)
-
-        storage.save()
+        
+        if models.storage_t == "db":
+            storage.new(new_instance)
         print(new_instance.id)
         storage.save()
 
