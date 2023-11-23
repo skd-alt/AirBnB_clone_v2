@@ -6,6 +6,7 @@ from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 import models
 
+
 class Place(BaseModel, Base):
     """ A place to stay """
     if models.storage_t == 'db':
@@ -18,8 +19,9 @@ class Place(BaseModel, Base):
         number_bathrooms = Column(Integer, default=0, nullable=False)
         max_guest = Column(Integer, default=0, nullable=False)
         price_by_night = Column(Integer, default=0, nullable=False)
-        latitude = Column(Float, default=0.0, nullable=False)
-        longitude = Column(Float, default=0.0, nullable=False)
+        latitude = Column(Float, default=0.0, nullable=True)
+        longitude = Column(Float, default=0.0, nullable=True)
+        reviews = relationship("Review", backref="place")
 
     else:
         city_id = ""
@@ -33,3 +35,13 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
+
+        @property
+        def reviews(self):
+            """Gets the list of review instances with place_id"""
+            revs = models.storage.all(Review)
+            rev_list = []
+            for rev in revs.values():
+                if rev.place_id == self.id:
+                    rev_list.append(rev)
+            return rev_list
