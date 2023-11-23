@@ -62,7 +62,7 @@ class BaseModel:
         dictionary['created_at'] = self.created_at.strptime('%Y-%m-%dT%H:%M:%S.%f')
         dictionary['updated_at'] = self.updated_at.strptime('%Y-%m-%dT%H:%M:%S.%f')
         if "_sa_instance_state" in dictionary:
-            del dictionary["_sa_instance_state"]
+            dictionary.pop("_sa_instance_state")
         return dictionary
 
     def delete(self):
