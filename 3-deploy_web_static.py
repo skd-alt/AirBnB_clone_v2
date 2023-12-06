@@ -54,4 +54,4 @@ def deploy():
     if not a_path:
         return False
 
-    return do_deploy(a_path)
+    do_deploy(a_path)
