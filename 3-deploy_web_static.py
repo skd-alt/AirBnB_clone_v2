@@ -30,9 +30,7 @@ def do_deploy(archive_path):
         return False
     try:
         tgzfile = archive_path.split("/")[-1]
-        print(tgzfile)
         filename = tgzfile.split(".")[0]
-        print(filename)
         pathname = "/data/web_static/releases/" + filename
         put(archive_path, '/tmp/')
         run("mkdir -p /data/web_static/releases/{}/".format(filename))
