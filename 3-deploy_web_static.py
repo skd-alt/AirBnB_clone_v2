@@ -51,7 +51,7 @@ def do_deploy(archive_path):
 def deploy():
     """Runs do_pack the do_deploy"""
     a_path = do_pack()
-    if not a_path:
+    if a_path == None:
         return False
 
-    do_deploy(a_path)
+    return do_deploy(a_path)
