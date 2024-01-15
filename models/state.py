@@ -13,10 +13,6 @@ class State(BaseModel, Base):
         name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state")
 
-        def __init__(self, *args, **kwargs):
-        """initializes state"""
-        super().__init__(*args, **kwargs)
-
         @property
         def cities(self):
             """getter for list of cities of state"""
